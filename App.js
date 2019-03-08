@@ -17,6 +17,30 @@ firebase.initializeApp(config);
 import { Container, Content, Header, Form, Input, Item, Button, Label } from 'native-base';
 
 export default class App extends Component {
+  constructor(props){
+    super(props)
+    this.state = {
+      email: '',
+      password: ''
+    }
+  }
+
+  signUpUser = (email, password) => {
+    try {
+      if(this.state.password < 6) {
+        alert("Password Must Be 6 Characters")
+        return;
+      }
+      firebase.auth().createUserWithEmailAndPassword(email, password)
+    }
+    catch(error) {
+      console.log(error.toString());
+    }
+  }
+
+  loginUser = (emai, password) => {
+
+  }
 
   render() {
     return (
@@ -27,6 +51,7 @@ export default class App extends Component {
               <Input
                 autoCorrect={false}
                 autoCapitalize="none"
+                onChangeText={(email) => this.setState({email})}
               />
             </Item>
             <Item floatingLabel>
@@ -35,14 +60,24 @@ export default class App extends Component {
                 autoCorrect={false}
                 autoCapitalize="none"
                 secureTextEntry={true}
+                onChangeText={(password) => this.setState({password})}
               />
             </Item>
             <Button style={{marginTop: 10}}
             full
             rounded
             success
+            onPress={()=> this.loginUser(this.state.email, this.state.password)}
             >
-            <Text>Log In</Text>
+            <Text style={{color: 'white'}}>Log In</Text>
+            </Button>
+            <Button style={{marginTop: 10}}
+            full
+            rounded
+            primary
+            onPress={()=> this.signUpUser(this.state.email, this.state.password)}
+            >
+            <Text style={{color: 'white'}}>Sign Up</Text>
             </Button>
           </Form>
         </Container>
