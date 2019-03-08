@@ -1,3 +1,5 @@
+//==================Imports/Config==================//
+
 import React, {Component} from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
@@ -16,7 +18,11 @@ firebase.initializeApp(config);
 
 import { Container, Content, Header, Form, Input, Item, Button, Label } from 'native-base';
 
-export default class App extends Component {
+import {createBottomTabNavigator, createAppContainer} from 'react-navigation'
+
+//==================Login==================//
+
+class Login extends Component {
   constructor(props){
     super(props)
     this.state = {
@@ -24,6 +30,8 @@ export default class App extends Component {
       password: ''
     }
   }
+
+  //==================App Functions==================//
 
   signUpUser = (email, password) => {
     try {
@@ -49,6 +57,7 @@ export default class App extends Component {
     }
   }
 
+//==================App Render==================//
 
   render() {
     return (
@@ -92,6 +101,42 @@ export default class App extends Component {
     );
   }
 }
+
+//==================Feed==================//
+class Feed extends Component {
+  render(){
+    return(
+      <View style={styles.container}>
+        <Text>Feed</Text>
+      </View>
+    )
+  }
+}
+
+
+//==================App==================//
+
+class App extends Component {
+  render(){
+      return(
+      <View style={styles.container}>
+        <Text>App</Text>
+      </View>
+    )
+  }
+}
+
+//==================Tab Navigator==================//
+
+const TabNavigator = createBottomTabNavigator({
+  Login: Login,
+  Feed: Feed,
+  App: App
+})
+
+export default createAppContainer(TabNavigator)
+
+//==================React Native Styles==================//
 
 const styles = StyleSheet.create({
   container: {
