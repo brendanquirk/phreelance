@@ -2,6 +2,7 @@
 
 import React, {Component} from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import Ionicons from 'react-native-vector-icons/Ionicons'
 
 import * as firebase from "firebase"
 
@@ -20,9 +21,9 @@ import { Container, Content, Header, Form, Input, Item, Button, Label } from 'na
 
 import {createBottomTabNavigator, createAppContainer} from 'react-navigation'
 
-//==================Login==================//
+//==================Home==================//
 
-class Login extends Component {
+class Home extends Component {
   constructor(props){
     super(props)
     this.state = {
@@ -129,7 +130,9 @@ class App extends Component {
 //==================Tab Navigator==================//
 
 const TabNavigator = createBottomTabNavigator({
-  Login: Login,
+  Home: {
+    screen: Home,
+  },
   Feed: Feed,
   App: App
 })
