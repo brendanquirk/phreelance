@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, AlertIOS } from 'react-native';
 import { Container, Content, Header, Form, Input, Item, Button, Label, List, ListItem } from 'native-base';
+import * as firebase from "firebase"
+
+
 
 //==================Home==================//
 
@@ -22,6 +25,7 @@ export default class Home extends Component {
         return;
       }
       firebase.auth().createUserWithEmailAndPassword(email, password)
+      AlertIOS.alert('User has been created!')
     }
     catch(error) {
       console.log(error.toString());
@@ -32,6 +36,7 @@ export default class Home extends Component {
     try{
       firebase.auth().signInWithEmailAndPassword(email, password).then((user) => {
         console.log(user);
+        AlertIOS.alert('You are now logged in!')
       })
     }
     catch(error) {
