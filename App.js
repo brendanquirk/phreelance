@@ -16,6 +16,8 @@ const config = {
   messagingSenderId: "950493367643"
 };
 firebase.initializeApp(config);
+//set variable to access database
+const db = firebase.database()
 
 import { Container, Content, Header, Form, Input, Item, Button, Label } from 'native-base';
 
@@ -27,6 +29,7 @@ class Home extends Component {
   constructor(props){
     super(props)
     this.state = {
+      displayName: '',
       email: '',
       password: ''
     }
@@ -40,7 +43,13 @@ class Home extends Component {
         alert("Password Must Be 6 Characters")
         return;
       }
-      firebase.auth().createUserWithEmailAndPassword(email, password)
+      firebase.auth().createUserWithEmailAndPassword(email, password, displayName).then((user) => {
+        if (user) {
+          user.updateProfile({
+            displayName: displayName
+          })
+        }
+      })
     }
     catch(error) {
       console.log(error.toString());
@@ -49,7 +58,7 @@ class Home extends Component {
 
   loginUser = (email, password) => {
     try{
-      firebase.auth().signInWithEmailAndPassword(email, password).then((user) => {
+      firebase.auth().signInWithEmailAndPassword(email, password, displayName).then((user) => {
         console.log(user);
       })
     }
@@ -63,7 +72,16 @@ class Home extends Component {
   render() {
     return (
         <Container style={styles.container}>
+          <Text style={{textAlign: 'center', fontSize: 75, textAlignVertical: 'top'}}> Phreelance </Text>
           <Form>
+          <Item floatingLabel>
+            <Label>Username</Label>
+            <Input
+              autoCorrect={false}
+              autoCapitalize="none"
+              onChangeText={(displayName) => this.setState({displayName})}
+            />
+          </Item>
             <Item floatingLabel>
               <Label>Email</Label>
               <Input
