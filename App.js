@@ -29,7 +29,6 @@ class Home extends Component {
   constructor(props){
     super(props)
     this.state = {
-      displayName: '',
       email: '',
       password: ''
     }
@@ -43,13 +42,7 @@ class Home extends Component {
         alert("Password Must Be 6 Characters")
         return;
       }
-      firebase.auth().createUserWithEmailAndPassword(email, password, displayName).then((user) => {
-        if (user) {
-          user.updateProfile({
-            displayName: displayName
-          })
-        }
-      })
+      firebase.auth().createUserWithEmailAndPassword(email, password)
     }
     catch(error) {
       console.log(error.toString());
@@ -58,7 +51,7 @@ class Home extends Component {
 
   loginUser = (email, password) => {
     try{
-      firebase.auth().signInWithEmailAndPassword(email, password, displayName).then((user) => {
+      firebase.auth().signInWithEmailAndPassword(email, password).then((user) => {
         console.log(user);
       })
     }
@@ -74,14 +67,6 @@ class Home extends Component {
         <Container style={styles.container}>
           <Text style={{textAlign: 'center', fontSize: 75, textAlignVertical: 'top'}}> Phreelance </Text>
           <Form>
-          <Item floatingLabel>
-            <Label>Username</Label>
-            <Input
-              autoCorrect={false}
-              autoCapitalize="none"
-              onChangeText={(displayName) => this.setState({displayName})}
-            />
-          </Item>
             <Item floatingLabel>
               <Label>Email</Label>
               <Input
