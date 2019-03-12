@@ -2,12 +2,12 @@ import React, {Component} from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Container, Content, Header, Form, Input, Item, Button, Label, List, ListItem } from 'native-base';
 
-//==================Feed==================//
-export default class Feed extends Component {
+//==================Dashboard==================//
+export default class Dashboard extends Component {
   render(){
     return(
       <View style={styles.container}>
-        <Text>Feed</Text>
+        <Text>Dashboard</Text>
       </View>
     )
   }

@@ -4,8 +4,11 @@ import React, {Component} from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import Profile from './src/components/Profile.js'
-import Feed from './src/components/Feed.js'
+import Dashboard from './src/components/Dashboard.js'
 import Home from './src/components/Home.js'
+import Login from './src/components/Login.js'
+import SignUp from './src/components/SignUp.js'
+
 
 import * as firebase from "firebase"
 
@@ -24,8 +27,27 @@ const db = firebase.database()
 
 
 
-import {createBottomTabNavigator, createAppContainer} from 'react-navigation'
+import {createBottomTabNavigator, createSwitchNavigator, createDrawerNavigator, createStackNavigator, createAppContainer} from 'react-navigation'
 
+//==================Draw Navigator==================//
+
+// const AppDrawerNavigator = createDrawerNavigator({
+//   Login: {
+//     screen: Login
+//   }
+// })
+
+//==================Stack Navigator==================//
+
+const AppStackNavigator = createStackNavigator({
+  Welcome:{screen: Home},
+  Login:{screen: Login},
+  SignUp:{screen: SignUp},
+  Dashboard:{screen: Dashboard}
+})
+
+
+export default createAppContainer(AppStackNavigator)
 
 //==================Tab Navigator==================//
 
@@ -33,11 +55,11 @@ const TabNavigator = createBottomTabNavigator({
   Home: {
     screen: Home,
   },
-  Feed: Feed,
+  Dashboard: Dashboard,
   Profile: Profile
 })
 
-export default createAppContainer(TabNavigator)
+
 
 //==================React Native Styles==================//
 
