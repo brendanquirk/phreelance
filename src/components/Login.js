@@ -21,12 +21,13 @@ export default class Login extends Component {
   loginUser = (email, password) => {
     console.log('login user is running');
     console.log(email);
-    
+
     try{
       firebase.auth().signInWithEmailAndPassword(email, password).then((user) => {
         console.log(user);
         AlertIOS.alert('You are now logged in!')
         console.log(this.props.navigation);
+        //Fetching data from firebase
         const firebaseTest = () => {
           let userId = firebase.auth();
           console.log(userId);
@@ -36,7 +37,9 @@ export default class Login extends Component {
           })
         }
         console.log(firebaseTest());
-        this.props.navigation.navigate('Dashboard')
+        this.props.navigation.navigate('Dashboard', {
+          test: "Test"
+        })
       })
     }
     catch(error) {

@@ -5,9 +5,12 @@ import { Container, Content, Header, Form, Input, Item, Button, Label, List, Lis
 //==================Dashboard==================//
 export default class Dashboard extends Component {
   render(){
+    const {navigation} = this.props
+    const items = navigation.getParam(items)
     return(
       <View style={styles.container}>
         <Text>Dashboard</Text>
+        <Text>Items: {this.props.navigation.getParam("test")}</Text>
       </View>
     )
   }
