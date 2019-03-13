@@ -36,6 +36,7 @@ export default class Login extends Component {
             let username = (snapshot.val() && snapshot.val().username) || 'Anonymous';
           })
         }
+        //End fetch
         console.log(firebaseTest());
         this.props.navigation.navigate('Dashboard', {
           test: "Test"
@@ -57,7 +58,7 @@ export default class Login extends Component {
   render() {
     return (
         <Container style={styles.container}>
-          <Text style={{textAlign: 'center', fontSize: 75, textAlignVertical: 'top', paddingBottom: 300}}> Phreelance </Text>
+          <Text style={{textAlign: 'center', fontSize: 75, textAlignVertical: 'top', paddingBottom: 150}}> Phreelance </Text>
           <Form>
             <Item floatingLabel>
               <Label>Email</Label>

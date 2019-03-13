@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import { StyleSheet, Text, View, AlertIOS, Button } from 'react-native';
-import { Container, Content, Header, Form, Input, Item, Label, List, ListItem } from 'native-base';
+import { StyleSheet, Text, View, AlertIOS } from 'react-native';
+import { Container, Content, Header, Form, Input, Item, Label, List, ListItem, Button } from 'native-base';
 import * as firebase from "firebase"
 
 
@@ -24,9 +24,22 @@ export default class Home extends Component {
   render(){
     return(
       <View style={styles.container}>
-      <Text style={{textAlign: 'center', fontSize: 75, textAlignVertical: 'top', paddingBottom: 300}}> Phreelance </Text>
-        <Button style={{}} title='Login' onPress={()=> this.props.navigation.navigate('Login')}/>
-        <Button title='SignUp' onPress={()=> this.props.navigation.navigate('SignUp')}/>
+      <Text style={{textAlign: 'center', fontSize: 75, textAlignVertical: 'top', paddingBottom: 150}}> Phreelance </Text>
+        <Button
+        title='Login' onPress={()=> this.props.navigation.navigate('Login')}
+        full
+        rounded
+        success
+        >
+        <Text style={{color: 'white'}}>Log In</Text>
+        </Button>
+        <Button style={{marginTop: 20}}title='SignUp' onPress={()=> this.props.navigation.navigate('SignUp')}
+        full
+        rounded
+        primary
+        >
+        <Text style={{color: 'white'}}>Sign Up</Text>
+        </Button>
       </View>
     )
   }

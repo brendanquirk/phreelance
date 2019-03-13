@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { StyleSheet, Text, View, AlertIOS } from 'react-native';
-import { Container, Content, Header, Form, Input, Item, Button, Label, List, ListItem } from 'native-base';
+import { Container, Content, Header, Form, Input, Item, Label, List, ListItem, Button } from 'native-base';
 import * as firebase from "firebase"
 
 
@@ -26,6 +26,7 @@ export default class SignUp extends Component {
       }
       firebase.auth().createUserWithEmailAndPassword(email, password)
       AlertIOS.alert('User has been created!')
+      this.props.navigation.navigate('Login')
     }
     catch(error) {
       console.log(error.toString());
@@ -37,7 +38,7 @@ export default class SignUp extends Component {
   render() {
     return (
         <Container style={styles.container}>
-          <Text style={{textAlign: 'center', fontSize: 75, textAlignVertical: 'top', paddingBottom: 300}}> Phreelance </Text>
+          <Text style={{textAlign: 'center', fontSize: 75, textAlignVertical: 'top', paddingBottom: 150}}> Phreelance </Text>
           <Form>
             <Item floatingLabel>
               <Label>Email</Label>

@@ -29,13 +29,13 @@ const db = firebase.database()
 
 import {createBottomTabNavigator, createSwitchNavigator, createDrawerNavigator, createStackNavigator, createAppContainer} from 'react-navigation'
 
-//==================Draw Navigator==================//
+//==================Tab Navigator==================//
 
-// const AppDrawerNavigator = createDrawerNavigator({
-//   Login: {
-//     screen: Login
-//   }
-// })
+const DashBoardTabNavigator = createBottomTabNavigator({
+  Dashboard,
+  Profile
+})
+
 
 //==================Stack Navigator==================//
 
@@ -43,7 +43,7 @@ const AppStackNavigator = createStackNavigator({
   Welcome:{screen: Home},
   Login:{screen: Login},
   SignUp:{screen: SignUp},
-  Dashboard:{screen: Dashboard}
+  Dashboard: {screen: DashBoardTabNavigator}
 })
 
 
