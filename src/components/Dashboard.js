@@ -9,8 +9,10 @@ export default class Dashboard extends Component {
     return(
       <View style={styles.container}>
         <Text>Dashboard</Text>
-        <Text>Items: </Text>
-        <Image source={this.props.navigation.getParam("users").brendan.images.image1}/>
+        <Text>Images: </Text>
+        <Image
+        source={{uri: this.props.navigation.getParam("users").brendan.images.image1}}
+        style ={{width: 250, height: 250}}/>
       </View>
     )
   }
