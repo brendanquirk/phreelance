@@ -1,16 +1,16 @@
 import React, {Component} from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Image } from 'react-native';
 import { Container, Content, Header, Form, Input, Item, Button, Label, List, ListItem } from 'native-base';
+import * as firebase from "firebase"
 
 //==================Dashboard==================//
 export default class Dashboard extends Component {
   render(){
-    const {navigation} = this.props
-    const items = navigation.getParam(items)
     return(
       <View style={styles.container}>
         <Text>Dashboard</Text>
-        <Text>Items: {this.props.navigation.getParam("test")}</Text>
+        <Text>Items: </Text>
+        <Image source={this.props.navigation.getParam("users").brendan.images.image1}/>
       </View>
     )
   }

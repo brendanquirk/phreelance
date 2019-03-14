@@ -12,45 +12,49 @@ export default class Login extends Component {
     super(props)
     this.state = {
       email: '',
-      password: ''
+      password: '',
     }
   }
 
   //==================App Functions==================//
 
-  loginUser = (email, password) => {
-    console.log('login user is running');
-    console.log(email);
+  fetchUserData = () => {
+    fetch('https://phreelance-34ba2.firebaseio.com/users.json', {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json, text/plain, */*',
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(data => data.json())
+    .then(jData => {
+      this.setState({
+      users: jData
+    })
+    console.log(jData);
+    console.log(jData.brendan.images.image1);
+  })
+  .catch(err => console.log(err))
+  }
 
+  componentDidMount(){
+    //Fetching data from firebase
+    //End fetch
+    this.fetchUserData()
+  }
+
+  loginUser = (email, password) => {
     try{
       firebase.auth().signInWithEmailAndPassword(email, password).then((user) => {
-        console.log(user);
-        AlertIOS.alert('You are now logged in!')
-        console.log(this.props.navigation);
-        //Fetching data from firebase
-        const firebaseTest = () => {
-          let userId = firebase.auth();
-          console.log(userId);
-          return firebase.database().ref('/users/').once('value').then((snapshot) => {
-            console.log(snapshot.val().brendan.images);
-            let username = (snapshot.val() && snapshot.val().username) || 'Anonymous';
-          })
-        }
-        //End fetch
-        console.log(firebaseTest());
+        console.log(this.state.users);
         this.props.navigation.navigate('Dashboard', {
-          test: "Test"
+          users: this.state.users
         })
       })
     }
     catch(error) {
       console.log(error.toString());
     }
-  }
-
-  loginFunction = (email, password) => {
-    this.loginUser(this.state.email, this.state.password);
-
   }
 
 //==================App Render==================//

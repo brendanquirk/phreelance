@@ -25,7 +25,7 @@ export default class SignUp extends Component {
         return;
       }
       firebase.auth().createUserWithEmailAndPassword(email, password)
-      AlertIOS.alert('User has been created!')
+      AlertIOS.alert('Thank you for signing up! Please Login!')
       this.props.navigation.navigate('Login')
     }
     catch(error) {

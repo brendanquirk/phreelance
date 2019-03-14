@@ -15,12 +15,6 @@ export default class Home extends Component {
     }
   }
 
-  setInitialState = (snapshot) => {
-    this.setState({
-      images: snapshot
-    })
-  }
-
   render(){
     return(
       <View style={styles.container}>

@@ -23,7 +23,7 @@ const config = {
 };
 firebase.initializeApp(config);
 //set variable to access database
-const db = firebase.database()
+const rootRef = firebase.database().ref()
 
 
 
