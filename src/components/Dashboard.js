@@ -6,18 +6,16 @@ import * as firebase from "firebase"
 //==================Dashboard==================//
 export default class Dashboard extends Component {
   render(){
+    const getUsers = this.props.navigation.getParam("users")
+    console.log(getUsers);
+    console.log(getUsers[0]);
     return(
       <View style={styles.container}>
         <Text>Dashboard</Text>
-        <Text>Images: </Text>
-        <Image
-        source={{uri: this.props.navigation.getParam("users").brendan.images.image1}}
-        style ={{width: 250, height: 250}}/>
       </View>
     )
   }
 }
-
 
 const styles = StyleSheet.create({
   container: {
