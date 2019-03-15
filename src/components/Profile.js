@@ -54,6 +54,29 @@ export default class Profile extends Component {
         source={{uri: getUsers[0].images.image2}}
         style ={{width: 250, height: 250, borderWidth: 1, borderRadius: 40}}/>
         </View>
+        <Form>
+        <Item floatingLabel>
+          <Label>Image Name</Label>
+          <Input
+            autoCorrect={false}
+            autoCapitalize="none"
+          />
+        </Item>
+        <Item floatingLabel>
+          <Label>Image URL</Label>
+          <Input
+            autoCorrect={false}
+            autoCapitalize="none"
+          />
+        </Item>
+        <Button style={{marginTop: 20}}title='Submit Image' onPress={()=> this.createdImage()}
+        full
+        rounded
+        primary
+        >
+        <Text style={{color: 'white'}}>Submit Image</Text>
+        </Button>
+        </Form>
         <Button style={{marginTop: 20}}title='SignOut' onPress={()=> this.signOutUser() }
         full
         rounded
