@@ -17,7 +17,24 @@ export default class Profile extends Component {
   }
 
   handleCreateImage = (image) => {
-    fetch(`https://phreelance-34ba2.firebaseio.com/users/${userId}/.json`)
+    fetch(`https://phreelance-34ba2.firebaseio.com/users/0/images/.json`, {
+      body: JSON.stringify(image),
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json, text/plain, */*',
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(createdImage => {
+      return createdImage.json()
+    })
+    .catch(err => console.log(err))
+  }
+
+  handleSubmit = () => {
+    event.preventDefault()
+    console.log(this.state);
+    this.props.handleCreateImage(this.state)
   }
 
   render(){
