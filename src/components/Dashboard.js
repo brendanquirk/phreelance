@@ -7,8 +7,7 @@ import * as firebase from "firebase"
 export default class Dashboard extends Component {
   render(){
     const getUsers = this.props.navigation.getParam("users")
-    console.log(getUsers);
-    console.log(getUsers[0]);
+    const imageKeys = this.props.navigation.getParam("imageKeys");
     return(
       <View style={styles.container}>
         <Text>Dashboard</Text>

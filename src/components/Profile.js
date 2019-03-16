@@ -6,6 +6,14 @@ import * as firebase from "firebase"
 //==================Profile==================//
 
 export default class Profile extends Component {
+  constructor(){
+    super(
+      this.state={
+        name: '',
+        image: ''
+      }
+    )
+  }
   signOutUser = () => {
     try {
       firebase.auth.signOut().then((user) => {
@@ -54,7 +62,7 @@ export default class Profile extends Component {
         source={{uri: getUsers[0].images.image2}}
         style ={{width: 250, height: 250, borderWidth: 1, borderRadius: 40}}/>
         </View>
-        <Form>
+        <Form onSubmit={this.handleSubmit()}>
         <Item floatingLabel>
           <Label>Image Name</Label>
           <Input
