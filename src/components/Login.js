@@ -30,9 +30,10 @@ export default class Login extends Component {
     .then(jData => {
       this.setState({
       users: jData,
-      imageKeys: Object.keys(jData[0].images)
+      imageKeys: Object.keys(jData[0].images),
+      imageArray: Object.values(jData[0].images)
     })
-    console.log(jData);
+    console.log(this.state);
   })
   .catch(err => console.log(err))
   }
@@ -48,7 +49,8 @@ export default class Login extends Component {
       firebase.auth().signInWithEmailAndPassword(email, password).then((user) => {
         this.props.navigation.navigate('Dashboard', {
           users: this.state.users,
-          imageKeys: this.state.imageKeys
+          imageKeys: this.state.imageKeys,
+          imageArray: this.state.imageArray
         })
       })
     }

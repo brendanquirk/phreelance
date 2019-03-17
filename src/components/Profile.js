@@ -1,18 +1,15 @@
 import React, {Component} from 'react';
-import { StyleSheet, Text, View, Image, ImageBackround } from 'react-native';
-import { Container, Content, Header, Form, Input, Item, Button, Label, List, ListItem } from 'native-base';
+import { StyleSheet, Text, View, Image, ImageBackround, ScrollView, TextInput } from 'react-native';
+import { Container, Content, Header, Form, Item, Button, Label, List, ListItem } from 'native-base';
 import * as firebase from "firebase"
 
 //==================Profile==================//
 
 export default class Profile extends Component {
   constructor(){
-    super(
-      this.state={
-        name: '',
-        image: ''
+    super()
+      this.state = {
       }
-    )
   }
   signOutUser = () => {
     try {
@@ -25,6 +22,8 @@ export default class Profile extends Component {
   }
 
   handleCreateImage = (image) => {
+    console.log('==========');
+    console.log(image);
     fetch(`https://phreelance-34ba2.firebaseio.com/users/0/images/.json`, {
       body: JSON.stringify(image),
       method: 'POST',
@@ -34,57 +33,63 @@ export default class Profile extends Component {
       }
     })
     .then(createdImage => {
-      return createdImage.json()
+      this.setState({
+        imageArray: [this.state.imageArray, ...createdImage.json()]
+      })
     })
     .catch(err => console.log(err))
   }
 
-  handleSubmit = () => {
+  handleSubmit = (event) => {
     event.preventDefault()
+    console.log('=======');
     console.log(this.state);
-    this.props.handleCreateImage(this.state)
+    this.handleCreateImage(this.state)
+  }
+
+  handleChange = (event) => {
+    console.log(event.target.value);
+    this.setState({
+      [event.target.name]: event.target.value
+    })
   }
 
   render(){
     const getUsers = this.props.navigation.getParam("users")
     const imageKeys = this.props.navigation.getParam("imageKeys");
+    const imageArray = this.props.navigation.getParam("imageArray")
     console.log(imageKeys[0]);
 
       return(
+
       <Container style={styles.container}>
-        <Text style={{textAlign: 'center'}}>Profile Page</Text>
-        <Text style={{textAlign: 'center'}}>User: {getUsers[0].name}</Text>
-        <View style={{alignItems: 'center', justifyContent: 'center'}}>
-        <Image
-        source={{uri: getUsers[0].images[imageKeys[0]].image2}}
-        style ={{width: 250, height: 250, borderWidth: 1, borderRadius: 40}}/>
-        <Image
-        source={{uri: getUsers[0].images.image2}}
-        style ={{width: 250, height: 250, borderWidth: 1, borderRadius: 40}}/>
+      <ScrollView>
+        <Text style={{textAlign: 'center', fontSize: 50, marginTop: 50}}>Profile Page</Text>
+        <Text style={{textAlign: 'center', fontSize: 25, paddingBottom: 15}}>User: {getUsers[0].name}</Text>
+        <View style={{alignItems: 'center', justifyContent: 'center', paddingBottom: 20}}>
+        {imageArray.map((image, index) => {
+          return(
+            <Image
+            key={index}
+            source={{uri: image.image}}
+            style ={{width: 250, height: 250, borderWidth: 1, borderRadius: 40, marginBottom:15}}/>
+          )
+        })}
         </View>
-        <Form onSubmit={this.handleSubmit()}>
-        <Item floatingLabel>
-          <Label>Image Name</Label>
-          <Input
-            autoCorrect={false}
-            autoCapitalize="none"
-          />
-        </Item>
-        <Item floatingLabel>
-          <Label>Image URL</Label>
-          <Input
-            autoCorrect={false}
-            autoCapitalize="none"
-          />
-        </Item>
-        <Button style={{marginTop: 20}}title='Submit Image' onPress={()=> this.createdImage()}
+        <View style={{borderTopWidth:1, borderBottomWidth:1}}>
+        <TextInput
+          style={{height: 40}}
+          placeholder="Image URL Here"
+          onChangeText={(text) => this.setState({image: text})}
+        />
+        </View>
+        <Button style={{marginTop: 20}}title='Submit Image' onPress = {()=> this.handleCreateImage(this.state)}
         full
         rounded
         primary
         >
         <Text style={{color: 'white'}}>Submit Image</Text>
         </Button>
-        </Form>
         <Button style={{marginTop: 20}}title='SignOut' onPress={()=> this.signOutUser() }
         full
         rounded
@@ -92,7 +97,9 @@ export default class Profile extends Component {
         >
         <Text style={{color: 'white'}}>Sign Out</Text>
         </Button>
+        </ScrollView>
       </Container>
+
     )
   }
 }
