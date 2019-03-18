@@ -64,7 +64,7 @@ export default class Login extends Component {
   render() {
     return (
         <Container style={styles.container}>
-          <Text style={{textAlign: 'center', fontSize: 75, textAlignVertical: 'top', paddingBottom: 150}}> Phreelance </Text>
+          <Text style={{textAlign: 'center', fontSize: 75, textAlignVertical: 'top', paddingBottom: 150, color: 'white'}}> Phreelance </Text>
           <Form>
             <Item floatingLabel>
               <Label>Email</Label>
@@ -101,7 +101,7 @@ export default class Login extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#729eba',
     justifyContent: 'center',
     padding: 10,
   },

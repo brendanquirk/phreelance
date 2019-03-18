@@ -17,8 +17,9 @@ export default class Home extends Component {
 
   render(){
     return(
+
       <View style={styles.container}>
-      <Text style={{textAlign: 'center', fontSize: 75, textAlignVertical: 'top', paddingBottom: 150}}> Phreelance </Text>
+      <Text style={{textAlign: 'center', fontSize: 75, textAlignVertical: 'top', paddingBottom: 150, color: 'white'}}> Phreelance </Text>
         <Button
         title='Login' onPress={()=> this.props.navigation.navigate('Login')}
         full
@@ -43,7 +44,7 @@ export default class Home extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#729eba',
     justifyContent: 'center',
     padding: 10,
   },

@@ -54,6 +54,19 @@ export default class Profile extends Component {
     })
   }
 
+  removeFromArray = (array, arrayIndex) => {
+    this.setState(prevState => {
+      prevState[array].splice(arrayIndex, 1)
+      return {
+        [array]: prevState[array]
+      }
+    })
+  }
+
+  handleDelete = (arrayIndex, array) => {
+
+  }
+
   render(){
     const getUsers = this.props.navigation.getParam("users")
     const imageKeys = this.props.navigation.getParam("imageKeys");
@@ -64,8 +77,8 @@ export default class Profile extends Component {
 
       <Container style={styles.container}>
       <ScrollView>
-        <Text style={{textAlign: 'center', fontSize: 50, marginTop: 50}}>Profile Page</Text>
-        <Text style={{textAlign: 'center', fontSize: 25, paddingBottom: 15}}>User: {getUsers[0].name}</Text>
+        <Text style={{color:'white', textAlign: 'center', fontSize: 50, marginTop: 50}}>Profile Page</Text>
+        <Text style={{textAlign: 'center', fontSize: 25, paddingBottom: 15, color: 'white'}}>User: {getUsers[0].name}</Text>
         <View style={{alignItems: 'center', justifyContent: 'center', paddingBottom: 20}}>
         {imageArray.map((image, index) => {
           return(
@@ -109,7 +122,7 @@ export default class Profile extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#729eba',
     justifyContent: 'center',
     padding: 10,
   },
