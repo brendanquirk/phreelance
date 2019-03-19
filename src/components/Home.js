@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { StyleSheet, Text, View, AlertIOS } from 'react-native';
+import { StyleSheet, Text, View, AlertIOS, Image } from 'react-native';
 import { Container, Content, Header, Form, Input, Item, Label, List, ListItem, Button } from 'native-base';
 import * as firebase from "firebase"
 
@@ -19,7 +19,10 @@ export default class Home extends Component {
     return(
 
       <View style={styles.container}>
-      <Text style={{textAlign: 'center', fontSize: 75, textAlignVertical: 'top', paddingBottom: 150, color: 'white'}}> Phreelance </Text>
+      <Text style={{textAlign: 'center', fontSize: 75, textAlignVertical: 'top', paddingBottom: 75, color: 'white'}}> Phreelance </Text>
+      <View style={{justifyContent: 'center', alignItems: 'center'}}>
+      <Image source={{uri: 'https://images.pexels.com/photos/122400/pexels-photo-122400.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'}} style={{width: 400, height: 250, marginBottom: 50, borderRadius: 20}}/>
+      </View>
         <Button
         title='Login' onPress={()=> this.props.navigation.navigate('Login')}
         full

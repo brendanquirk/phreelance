@@ -64,7 +64,13 @@ export default class Profile extends Component {
   }
 
   handleDelete = (arrayIndex, array) => {
-
+    fetch(`https://phreelance-34ba2.firebaseio.com/users/0/images/${imageKeys}.json`, {
+      method: 'DELETE'
+    })
+    .then(data => {
+      this.removeFromArray('imageArray', arrayIndex)
+    })
+    .catch(err=> console.log(err))
   }
 
   render(){
@@ -86,8 +92,10 @@ export default class Profile extends Component {
             <Image
             key={index}
             source={{uri: image.image}}
-            style ={{width: 250, height: 250, borderWidth: 1, borderRadius: 40, marginBottom:15}}/>
-            <Button style={{textAlign: 'center'}}><Text style={{color:'white'}}>Delete Image</Text></Button>
+            style ={{width: 250, height: 250, borderWidth: 1, borderRadius: 40, marginBottom:5}}/>
+            <View style={{justifyContent: 'center', alignItems: 'center', marginBottom: 20}}>
+            <Button style={{alignItems: 'center'}}><Text style={{color:'white'}}>Delete Image</Text></Button>
+            </View>
             </>
           )
         })}
