@@ -82,10 +82,13 @@ export default class Profile extends Component {
         <View style={{alignItems: 'center', justifyContent: 'center', paddingBottom: 20}}>
         {imageArray.map((image, index) => {
           return(
+            <>
             <Image
             key={index}
             source={{uri: image.image}}
             style ={{width: 250, height: 250, borderWidth: 1, borderRadius: 40, marginBottom:15}}/>
+            <Button style={{textAlign: 'center'}}><Text style={{color:'white'}}>Delete Image</Text></Button>
+            </>
           )
         })}
         </View>
