@@ -46,7 +46,7 @@ export default class Profile extends Component {
   }
 
   handleDelete = (arrayIndex, array) => {
-    fetch(`https://phreelance-34ba2.firebaseio.com/users/0/images/${imageKeys}.json`, {
+    fetch(`https://phreelance-34ba2.firebaseio.com/users/0/images.json`, {
       method: 'DELETE'
     })
     .then(data => {
@@ -117,7 +117,7 @@ export default class Profile extends Component {
             source={{uri: image.image}}
             style ={{width: 250, height: 250, borderWidth: 1, borderRadius: 40, marginBottom:5}}/>
             <View style={{justifyContent: 'center', alignItems: 'center', marginBottom: 20, borderRadius: 20}}>
-            <Button style={{borderRadius: 20, padding: 5}} danger><Text style={{color:'white'}}>Delete Image</Text></Button>
+            <Button style={{borderRadius: 20, padding: 5}} danger onPress={()=> this.handleDelete()}><Text style={{color:'white'}}>Delete Image</Text></Button>
             </View>
             </>
           )
