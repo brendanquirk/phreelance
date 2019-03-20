@@ -21,24 +21,6 @@ export default class Profile extends Component {
     }
   }
 
-  handleCreateImage = (image) => {
-    console.log('==========');
-    console.log(image);
-    fetch(`https://phreelance-34ba2.firebaseio.com/users/0/images/.json`, {
-      body: JSON.stringify(image),
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json, text/plain, */*',
-        'Content-Type': 'application/json'
-      }
-    })
-    .then(createdImage => {
-      this.setState({
-        imageArray: [this.state.imageArray, ...createdImage.json()]
-      })
-    })
-    .catch(err => console.log(err))
-  }
 
   handleSubmit = (event) => {
     event.preventDefault()
@@ -73,51 +55,93 @@ export default class Profile extends Component {
     .catch(err=> console.log(err))
   }
 
+  fetchUserData = () => {
+    fetch('https://phreelance-34ba2.firebaseio.com/users.json', {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json, text/plain, */*',
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(data => data.json())
+    .then(jData => {
+      this.setState({
+      users: jData,
+      imageKeys: Object.keys(jData[0].images),
+      imageArray: Object.values(jData[0].images)
+    })
+    console.log(this.state);
+  })
+  .catch(err => console.log(err))
+  }
+
+  componentDidMount(){
+    //Fetching data from firebase
+    //End fetch
+    this.fetchUserData()
+  }
+
+  handleCreateImage = (image) => {
+    fetch(`https://phreelance-34ba2.firebaseio.com/users/0/images/.json`, {
+      body: JSON.stringify(image),
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json, text/plain, */*',
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(createdImage => {
+      console.log('===========');
+      console.log(createdImage.json());
+      this.fetchUserData()
+      console.log('bbbbbbbbbb');
+    })
+    .catch(err => console.log(err))
+  }
+
   render(){
-    const getUsers = this.props.navigation.getParam("users")
-    const imageKeys = this.props.navigation.getParam("imageKeys");
-    const imageArray = this.props.navigation.getParam("imageArray")
-    console.log(imageKeys[0]);
+
 
       return(
 
       <Container style={styles.container}>
       <ScrollView>
         <Text style={{color:'white', textAlign: 'center', fontSize: 50, marginTop: 50}}>Profile Page</Text>
-        <Text style={{textAlign: 'center', fontSize: 25, paddingBottom: 15, color: 'white'}}>User: {getUsers[0].name}</Text>
+        <Text style={{textAlign: 'center', fontSize: 25, paddingBottom: 15, color: 'white'}}>User: {this.state.users ? this.state.users[0].name : ''}</Text>
         <View style={{alignItems: 'center', justifyContent: 'center', paddingBottom: 20}}>
-        {imageArray.map((image, index) => {
+        {this.state.imageArray ? this.state.imageArray.map((image, index) => {
           return(
             <>
             <Image
             key={index}
             source={{uri: image.image}}
             style ={{width: 250, height: 250, borderWidth: 1, borderRadius: 40, marginBottom:5}}/>
-            <View style={{justifyContent: 'center', alignItems: 'center', marginBottom: 20}}>
-            <Button style={{alignItems: 'center'}}><Text style={{color:'white'}}>Delete Image</Text></Button>
+            <View style={{justifyContent: 'center', alignItems: 'center', marginBottom: 20, borderRadius: 20}}>
+            <Button style={{borderRadius: 20, padding: 5}} danger><Text style={{color:'white'}}>Delete Image</Text></Button>
             </View>
             </>
           )
-        })}
+        }) : <Text>''</Text> }
         </View>
-        <View style={{borderTopWidth:1, borderBottomWidth:1}}>
+        <View style={{borderTopWidth:1, borderBottomWidth:1 , borderColor: 'white'}}>
         <TextInput
-          style={{height: 40}}
+          style={{height: 40, color: 'white'}}
           placeholder="Image URL Here"
+          placeholderTextColor="white"
           onChangeText={(text) => this.setState({image: text})}
         />
         </View>
         <Button style={{marginTop: 20}}title='Submit Image' onPress = {()=> this.handleCreateImage(this.state)}
         full
         rounded
-        primary
+        success
         >
         <Text style={{color: 'white'}}>Submit Image</Text>
         </Button>
         <Button style={{marginTop: 20}}title='SignOut' onPress={()=> this.signOutUser() }
         full
         rounded
-        primary
+        warning
         >
         <Text style={{color: 'white'}}>Sign Out</Text>
         </Button>
@@ -133,7 +157,7 @@ export default class Profile extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#729eba',
+    backgroundColor: 'rgba(38, 133, 186, 0.77)',
     justifyContent: 'center',
     padding: 10,
   },

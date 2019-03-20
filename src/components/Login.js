@@ -18,39 +18,14 @@ export default class Login extends Component {
 
   //==================App Functions==================//
 
-  fetchUserData = () => {
-    fetch('https://phreelance-34ba2.firebaseio.com/users.json', {
-      method: 'GET',
-      headers: {
-        'Accept': 'application/json, text/plain, */*',
-        'Content-Type': 'application/json'
-      }
-    })
-    .then(data => data.json())
-    .then(jData => {
-      this.setState({
-      users: jData,
-      imageKeys: Object.keys(jData[0].images),
-      imageArray: Object.values(jData[0].images)
-    })
-    console.log(this.state);
-  })
-  .catch(err => console.log(err))
-  }
-
-  componentDidMount(){
-    //Fetching data from firebase
-    //End fetch
-    this.fetchUserData()
-  }
-
   loginUser = (email, password) => {
     try{
       firebase.auth().signInWithEmailAndPassword(email, password).then((user) => {
         this.props.navigation.navigate('Dashboard', {
           users: this.state.users,
           imageKeys: this.state.imageKeys,
-          imageArray: this.state.imageArray
+          imageArray: this.state.imageArray,
+          handleCreateImage: this.handleCreateImage
         })
       })
     }
@@ -70,23 +45,25 @@ export default class Login extends Component {
           </View>
           <Form>
             <Item floatingLabel>
-              <Label>Email</Label>
+              <Label style={{color:'white'}}>Email</Label>
               <Input
+                style={{color:'white'}}
                 autoCorrect={false}
                 autoCapitalize="none"
                 onChangeText={(email) => this.setState({email})}
               />
             </Item>
             <Item floatingLabel>
-              <Label>Password</Label>
+              <Label style={{color:'white'}}>Password</Label>
               <Input
+                style={{color:'white'}}
                 autoCorrect={false}
                 autoCapitalize="none"
                 secureTextEntry={true}
                 onChangeText={(password) => this.setState({password})}
               />
             </Item>
-            <Button style={{marginTop: 10}}
+            <Button style={{marginTop: 10, marginBottom: 80}}
             full
             rounded
             success
@@ -104,7 +81,7 @@ export default class Login extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#729eba',
+    backgroundColor: 'rgba(38, 133, 186, 0.77)',
     justifyContent: 'center',
     padding: 10,
   },

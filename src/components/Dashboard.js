@@ -19,7 +19,7 @@ export default class Dashboard extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#729eba',
+    backgroundColor: 'rgba(38, 133, 186, 0.77)',
     justifyContent: 'center',
     padding: 10,
   },

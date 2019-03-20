@@ -44,23 +44,25 @@ export default class SignUp extends Component {
           </View>
           <Form>
             <Item floatingLabel>
-              <Label>Email</Label>
+              <Label style={{color: 'white'}}>Email</Label>
               <Input
+                style={{color: 'white'}}
                 autoCorrect={false}
                 autoCapitalize="none"
                 onChangeText={(email) => this.setState({email})}
               />
             </Item>
             <Item floatingLabel>
-              <Label>Password</Label>
+              <Label style={{color: 'white'}}>Password</Label>
               <Input
+                style={{color: 'white'}}
                 autoCorrect={false}
                 autoCapitalize="none"
                 secureTextEntry={true}
                 onChangeText={(password) => this.setState({password})}
               />
             </Item>
-            <Button style={{marginTop: 10}}
+            <Button style={{marginTop: 10, marginBottom: 80}}
             full
             rounded
             primary
@@ -78,7 +80,7 @@ export default class SignUp extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#729eba',
+    backgroundColor: 'rgba(38, 133, 186, 0.77)',
     justifyContent: 'center',
     padding: 10,
   },

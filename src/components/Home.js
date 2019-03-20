@@ -31,7 +31,7 @@ export default class Home extends Component {
         >
         <Text style={{color: 'white'}}>Log In</Text>
         </Button>
-        <Button style={{marginTop: 20}}title='SignUp' onPress={()=> this.props.navigation.navigate('SignUp')}
+        <Button style={{marginTop: 20, marginBottom: 60}}title='SignUp' onPress={()=> this.props.navigation.navigate('SignUp')}
         full
         rounded
         primary
@@ -47,7 +47,7 @@ export default class Home extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#729eba',
+    backgroundColor: 'rgba(38, 133, 186, 0.77)',
     justifyContent: 'center',
     padding: 10,
   },
