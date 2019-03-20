@@ -4,6 +4,7 @@
 - React Native
 - Firebase
 - Native Base
+- Expo
 
 ### Approach Taken
 First I structured my data inside the firebase console. I then started building out the layout of the app starting with the navigation. I added a landing page that navigates to a login or signup page. The signup page navigates to the login page when you submit a new user. The login page navigates to the dashboard of the app which has a tab navigator with the main dashboard that is empty as of now and a profile page where you can add images and delete images.
